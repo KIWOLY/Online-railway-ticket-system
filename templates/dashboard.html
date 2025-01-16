@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Railway Ticket Booking System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            padding-top: 20px;
+        }
+        .sidebar a {
+            color: #fff;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #007bff;
+        }
+        .sidebar h4 {
+            margin-bottom: 20px;
+        }
+        .main-content {
+            padding: 20px;
+        }
+        .main-content h2 {
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    {% if messages %}
+    <div class="container my-3">
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar col-md-2">
+            <h4 class="text-center text-white">E-Ticket Booking</h4>
+            <a href="{% url 'train_list' %}">Train List</a>
+            <a href="{% url 'my_bookings' %}">My Booking</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content col-md-10">
+            <h2>Welcome to Tanzania SGR</h2>
+            <p>Welcome, {{ user.username }}, to the Tanzania Railway Ticket Booking System! Here you can manage your bookings efficiently and explore all the benefits of SGR.</p>
+            <div class="row align-items-center">
+                <!-- Image Section -->
+                <div class="col-md-5">
+                    <img src="{% static 'sgr.jpg' %}" alt="Tanzania SGR" class="img-fluid rounded shadow">
+                </div>
+
+                <!-- Text Section -->
+                <div class="col-md-7">
+                    <div class="highlight">
+                        <h4>Promoting Tanzania's Economy with SGR</h4>
+                        <ul>
+                            <li><strong>Efficient Transportation:</strong> Faster and more efficient transportation of goods and passengers, reducing travel time and improving logistics.</li>
+                            <li><strong>Job Creation:</strong> Generates employment opportunities in construction, maintenance, and operations.</li>
+                            <li><strong>Boosts Trade:</strong> Connects major cities and ports, facilitating the movement of goods across Tanzania and East Africa.</li>
+                            <li><strong>Environmental Benefits:</strong> More environmentally-friendly, reducing carbon emissions compared to road transport.</li>
+                            <li><strong>Economic Growth:</strong> Enhances connectivity, encouraging investments in industries, tourism, and agriculture.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

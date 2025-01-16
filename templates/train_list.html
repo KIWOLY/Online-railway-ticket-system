@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Trains</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="{% url 'dashboard' %}">Railway System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'dashboard' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container mt-5">
+        <h2 class="text-center text-primary mb-4">Available Trains</h2>
+        <form method="post" class="row g-3">
+            {% csrf_token %}
+            <div class="col-md-5">
+                <input type="text" class="form-control" name="source" placeholder="Source" required>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" name="destination" placeholder="Destination" required>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+            </div>
+        </form>
+
+        <!-- Train List -->
+        <div class="mt-4">
+            {% if trains %}
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Train Name</th>
+                            <th>Route</th>
+                            <th>Departure Time</th>
+                            <th>Arrival Time</th>
+                            <th>Seats Available</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for train in trains %}
+                        <tr>
+                            <td>{{ train.name }}</td>
+                            <td>{{ train.source }} → {{ train.destination }}</td>
+                            <td>{{ train.departure_time|date:"M d, Y H:i" }}</td>
+                            <td>{{ train.arrival_time|date:"M d, Y H:i" }}</td>
+                            <td>{{ train.seats_available }}</td>
+                            <td>
+                                <a href="{% url 'book_train' train.id %}" class="btn btn-success btn-sm">Book</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="text-center text-danger">No trains found for the selected route.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
