@@ -12,6 +12,6 @@ Online ticket booking & management
 
 Simple and user-friendly interface
 
-💡 Purpose
+Purpose
 
 The system is designed to make railway ticket booking faster, easier, and more convenient for passengers.
