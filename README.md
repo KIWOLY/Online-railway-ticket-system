@@ -14,4 +14,4 @@ Simple and user-friendly interface
 
 Purpose
 
-The system is designed to make railway ticket booking faster, easier, and more convenient for passengers and managements.
+The system is designed to make railway ticket booking faster, easier, and more convenient for passengers and managements in using railway tickets .
